@@ -1,3 +1,4 @@
+// очень важная мелочь - не допускайте орфографических ошибок в названиях
 public class Registr {
 
     private Person[] people;
@@ -6,6 +7,7 @@ public class Registr {
         people = new Person[countPers];
     }
 
+    // интерфейс класса не интуитивен, на консультации разберём почему
     public void add() {
         PersonCreates personCreates = new PersonCreates();
         for (int i = 0; i < people.length; i++) {

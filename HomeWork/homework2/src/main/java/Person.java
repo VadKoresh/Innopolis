@@ -1,5 +1,6 @@
 public class Person {
 
+    // старайтесь делать переменный финальными когда это возможно
     private Sex sex;
     private String name;
     private int age;
