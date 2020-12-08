@@ -12,7 +12,8 @@ public class CleanUp {
         Class[] interfaces = clazz.getInterfaces();
         for (Class interClazz: interfaces){
             if (interClazz.getName().equals("Map")){
-                mapCleanOutput(object, fieldsToCleanup, fieldsToOutput);
+                mapOutput(object, fieldsToOutput);
+                mapClean(object, fieldsToCleanup);
             }
         }
         fieldCleanUp(object, fieldsToCleanup, clazz);
@@ -61,30 +62,35 @@ public class CleanUp {
         }
     }
 
-    public void mapCleanOutput(Object object, Set<String> fieldsToCleanup, Set<String> fieldsToOutput){
+    public void mapClean(Object object, Set<String> fieldsToCleanup) {
         Map<?, ?> map = (Map<?, ?>) object;
 
         Iterator<String> iteratorClean = fieldsToCleanup.iterator();
-        Iterator<String> iteratorOut = fieldsToOutput.iterator();
+
 
         while (iteratorClean.hasNext()) {
             String key = iteratorClean.next();
-            if(map.containsKey(key)) {
+            if (map.containsKey(key)) {
                 map.remove(key);
-            } else {
-                throw new IllegalArgumentException("Поле отсутствует");
-            }
-        }
-
-        while (iteratorOut.hasNext()) {
-            String key = iteratorOut.next();
-            if(map.containsKey(key)) {
-                System.out.println(map.get(key));
             } else {
                 throw new IllegalArgumentException("Поле отсутствует");
             }
         }
     }
 
+        public void mapOutput(Object object, Set<String> fieldsToOutput){
+            Map<?, ?> map = (Map<?, ?>) object;
 
-}
+            Iterator<String> iteratorOut = fieldsToOutput.iterator();
+
+            while (iteratorOut.hasNext()) {
+                String key = iteratorOut.next();
+                if (map.containsKey(key)) {
+                    System.out.println(map.get(key));
+                } else {
+                    throw new IllegalArgumentException("Поле отсутствует");
+                }
+            }
+        }
+    }
+
