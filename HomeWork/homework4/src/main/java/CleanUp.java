@@ -5,17 +5,22 @@ import java.util.Set;
 
 public class CleanUp {
 
+    // очень хотелось бы примеров, на которых можно протестировать работу
     void cleanup(Object object, Set<String> fieldsToCleanup, Set<String> fieldsToOutput){
 
         Class<?> clazz = object.getClass();
 
+        // если класс будет реализовывать ин терфейс не Map, а например NavigableMap, то мы это не увидим, нужно
+        // также просмотреть и что наследуют интерфейсы
         Class[] interfaces = clazz.getInterfaces();
         for (Class interClazz: interfaces){
+            // лучше используйте полное имя класса
             if (interClazz.getName().equals("Map")){
                 mapOutput(object, fieldsToOutput);
                 mapClean(object, fieldsToCleanup);
             }
         }
+        // если вы поняли, что это мапа, то вам не нужно применять у ней подход для обычных объектов
         fieldCleanUp(object, fieldsToCleanup, clazz);
         fieldOutput(object, fieldsToOutput, clazz);
     }
@@ -38,6 +43,9 @@ public class CleanUp {
                 }else {
                     field.set(object, null);
                 }
+                // если вы упадёте, то те поля, которые вы уже успели очистить такими и останутся, а по зпдпче объект
+                // должен в случае ошибки остаться неизменным
+                // и лучше прокиньте, нес стоит замалчтивать ошибку. То же про вывод полей
             } catch (NoSuchFieldException | IllegalAccessException e) {
                 e.printStackTrace();
             }
@@ -73,6 +81,9 @@ public class CleanUp {
             if (map.containsKey(key)) {
                 map.remove(key);
             } else {
+                // опять же если вы упадёте, то те поля, которые вы уже успели очистить такими и останутся, а по зпдпче
+                // объект
+                // должен в случае ошибки остаться неизменным. То же про вывод полей
                 throw new IllegalArgumentException("Поле отсутствует");
             }
         }
