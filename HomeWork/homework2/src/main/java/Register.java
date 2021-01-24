@@ -18,10 +18,10 @@ public class Register {
     }
 
     public void sortedBubble() {
-        new SortedMetodBubble().sortedPerson(people);
+        new SortedMethodBubble().sortedPerson(people);
     }
 
     public void sortPast() {
-        new SotredInsertMetod().sortedPerson(people);
+        new SortedInsertMethod().sortedPerson(people);
     }
 }

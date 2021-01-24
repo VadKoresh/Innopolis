@@ -1,4 +1,4 @@
-public class SortedMetodBubble implements Sorted {
+public class SortedMethodBubble implements Sorted {
 
   @Override
   public void sortedPerson(Person[] people) {
