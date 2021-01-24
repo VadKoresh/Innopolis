@@ -1,9 +1,8 @@
 public class Person {
 
-    // старайтесь делать переменный финальными когда это возможно
-    private Sex sex;
-    private String name;
-    private int age;
+    private final Sex sex;
+    private final String name;
+    private final int age;
 
     public Person(Sex sex, String name, int age) {
         this.sex = sex;
